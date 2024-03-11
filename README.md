@@ -1,7 +1,7 @@
 # taskManagementSystem
 making a mern application for task management ;
 
-Project: Task Management System
+# Project: Task Management System
 Overview:
 The Task Management System allows users to create, update, delete, and view tasks. Users can register for an account, log in, and only access their tasks. The system also includes basic authentication and authorization functionalities.
 
