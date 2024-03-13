@@ -4,10 +4,8 @@ const register = async (req, res) => {
   try {
     const userData = req.body;
     const user = await authServices.registerUser(userData);
-
     //Registration is successful
     // console.log(user._id);
-
     res.status(201).json({
       message: "User registered successfully",
       userId: user._id,
@@ -19,12 +17,14 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const userData = req.body;
+
     const check = await authServices.login(userData);
-    res.status(201).json({
+    res.status(200).json({
       meassage: "user loggedIn successfully",
       token: check.token,
       user: check.getUser,
     });
+    console.log("in the controller end");
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
