@@ -15,7 +15,7 @@ const authenticateToken = (req, res, next) => {
     if (err) return res.sendStatus(403); // forbidden
 
     req.user = user;
-    console.log("userinmiddleware", user);
+    // console.log("userinmiddleware", user);
     next();
   });
 
