@@ -6,7 +6,8 @@ const register = async (req, res) => {
     const user = await authServices.registerUser(userData);
 
     //Registration is successful
-    console.log(user._id);
+    // console.log(user._id);
+
     res.status(201).json({
       message: "User registered successfully",
       userId: user._id,

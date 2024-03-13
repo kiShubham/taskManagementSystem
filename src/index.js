@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const authRoutes = require("./routes/auth.routes");
+const taskRoutes = require("./routes/task.routes");
 
 const PORT = process.env.PORT || 5000;
 
@@ -16,6 +17,7 @@ mongoose
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend server is running");
