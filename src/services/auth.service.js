@@ -33,11 +33,10 @@ const login = async (userData) => {
 
     if (!getUser) throw new Error("user didn't exist");
 
-    console.log(getUser);
     const bool = await getUser.comparePasswords(password); // check usermodel.js
     if (!bool) throw new Error("invaid password");
 
-    const token = jwt.sign({ id: getUser._id }, process.env.JWT_Secret);
+    const token = jwt.sign({ id: getUser._id }, process.env.JWT_Secret); // providing token
 
     return { token, getUser };
     //

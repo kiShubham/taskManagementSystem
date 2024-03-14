@@ -8,6 +8,7 @@ const create = async (data) => {
     throw error;
   }
 };
+
 const get = async (userId) => {
   try {
     const getTasks = await Task.find({ userId: userId });
@@ -17,6 +18,7 @@ const get = async (userId) => {
     throw error;
   }
 };
+
 const getbyId = async (id, userId) => {
   try {
     const getTask = await Task.find({ userId: userId, _id: id });
