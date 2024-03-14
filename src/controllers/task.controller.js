@@ -3,14 +3,13 @@ const taskServices = require("../services/task.service");
 const createTask = async (req, res) => {
   try {
     const { title, description, priority, isCompletedTask } = req.body;
-    // console.log(req.user.id);
-    const id = req.user.id;
+    const userId = req.user.id;
     const TaskData = {
       title,
       description,
       priority,
       isCompletedTask,
-      userId: id,
+      userId,
     };
     const task = await taskServices.create(TaskData);
     res.status(201).json({
@@ -23,14 +22,15 @@ const createTask = async (req, res) => {
 };
 const getAllTasks = async (req, res) => {
   try {
-    const { userId } = req.body;
-    if (userId !== req.user.id) {
-      return res
-        .status(401)
-        .json({ message: "login Again and you are unathorized " });
-    }
+    // const { userId } = req.body; // we are not sending through frontend ;
+    // if (userId !== req.user.id) {
+    //   return res
+    //     .status(422)
+    //     .json({ message: "login Again and you are unathorized " });
+    // }
+    const userId = req.user.id;
     const getTask = await taskServices.get(userId);
-    res.status(201).json(getTask);
+    res.status(200).json(getTask);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -82,7 +82,9 @@ const deleteTask = async (req, res) => {
         message: "no task found",
       });
     else res.status(200).json({ message: "deleted successfull", task });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {

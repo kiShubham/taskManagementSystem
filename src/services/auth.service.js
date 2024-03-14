@@ -24,17 +24,19 @@ const registerUser = async (userData) => {
     throw error;
   }
 };
+
 const login = async (userData) => {
   try {
-    const { username, password } = userData;
+    const { email, password } = userData;
 
-    const getUser = await User.findOne({ username: username });
+    const getUser = await User.findOne({ email: email });
+
     if (!getUser) throw new Error("user didn't exist");
 
     const bool = await getUser.comparePasswords(password); // check usermodel.js
     if (!bool) throw new Error("invaid password");
 
-    const token = jwt.sign({ id: getUser._id }, process.env.JWT_Secret);
+    const token = jwt.sign({ id: getUser._id }, process.env.JWT_Secret); // providing token
 
     return { token, getUser };
     //
@@ -44,14 +46,3 @@ const login = async (userData) => {
 };
 
 module.exports = { registerUser, login };
-
-/*  
-
-if (getUser) {
-      const boolean = await brcypt.compare(password, getUser.password);
-      if (boolean) {
-        return { boolean, getUser };
-      } else throw new Error("invaid password");
-    } else throw new Error("user didn't exist");
-
-*/
